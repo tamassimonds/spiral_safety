@@ -54,11 +54,11 @@ register(
 )
 
 # Battleship (two-player)
-register(
-    id="Battleship-v0",
-    entry_point="spiral.envs.Battleship.env:BattleshipEnv",
-    grid_size=5,
-)
+# register(
+#     id="Battleship-v0",
+#     entry_point="spiral.envs.Battleship.env:BattleshipEnv",
+#     grid_size=5,
+# )
 
 
 def make_env(env_id: str, use_llm_obs_wrapper: bool):

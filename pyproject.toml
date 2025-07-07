@@ -25,7 +25,6 @@ classifiers = [
 dependencies = [
   "textblob",
   "textarena==0.6.4",
-  "latex2sympy2",
   "tabulate",
   "human_eval"
 ]

@@ -25,8 +25,8 @@ export LP_LOG_LEVEL=DEBUG
 python train_spiral.py \
     --env_id KuhnPoker-v1 \
     --use_llm_obs_wrapper \
-    --eval_env_ids TicTacToe-v0 KuhnPoker-v1 \
-    --eval_use_llm_obs_wrappers False True \
+    --eval_env_ids KuhnPoker-v1 \
+    --eval_use_llm_obs_wrappers False \
     --eval_split all \
     --gamma 1 \
     --gpus 8 \
@@ -37,7 +37,7 @@ python train_spiral.py \
     --num_envs 1 \
     --rollout_batch_size_per_device 16 \
     --pi_buffer_maxlen_per_device 16 \
-    --pretrain Qwen/Qwen3-4B-Base \
+    --pretrain Qwen/Qwen2.5-3B-Instruct \
     --enable_prefix_caching \
     --collocate \
     --vllm_sleep \
@@ -51,18 +51,18 @@ python train_spiral.py \
     --train_batch_size_per_device 1 \
     --beta 0 \
     --max_model_len 12800 \
-    --generate_max_length 4096 \
+    --generate_max_length 1024 \
     --max_context_length 32768 \
     --temperature 1.0 \
     --top_p 1 \
     --eval_steps 16 \
-    --save_steps -1 \
+    --save_steps 10 \
     --eval_games 16 \
     --eval_temperature 0.6 \
     --eval_top_p 0.95 \
-    --eval_generate_max_length 4096 \
+    --eval_generate_max_length 1024 \
     --max_train 51200 \
     --max_save_num 30 \
     --use-wb \
-    --wb-run-name spiral-qwen3-4b-base-kp-4k-self-play \
+    --wb-run-name spiral-qwen2.5-3b-base-kp-1k-self-play \
     --wb_project spiral

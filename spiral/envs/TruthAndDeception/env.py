@@ -72,6 +72,7 @@ class TruthAndDeceptionEnv(ta.Env):
                 f"Fact 1: {game_state['fact1']['fact']} ({'correct' if game_state['fact1']['is_correct'] else 'wrong'})\n"
                 f"Fact 2: {game_state['fact2']['fact']} ({'correct' if game_state['fact2']['is_correct'] else 'wrong'})\n"
                 "Your goal is to convince the other player to choose the incorrect fact.\n"
+                f"- You are allowed to lie, bluff and deceive your opponenet\n\n"
                 f"You will have a conversation for {self.state.max_turns - 1} turns.\n"
                 "After that, the other player will make their guess.\n"
                 "On your turn, simply type your message."

@@ -62,7 +62,13 @@ INVALID_ACTION = "[｜INVALID_ACTION｜]"
 @dataclass
 class SelfPlayArgs(PPOArgs):
     # Environment settings
-    env_id: Literal["TicTacToe-v0", "KuhnPoker-v1"] = "KuhnPoker-v1"
+    env_id: Literal[
+        "TicTacToe-v0", 
+        "KuhnPoker-v1", 
+        "SimpleNegotiation-v0", 
+        "SimpleNegotiation-v1",
+        "TruthAndDeception-v1"
+    ] = "KuhnPoker-v1"
     use_llm_obs_wrapper: bool = True  # Encode opponent history in the obs
 
     # Self-play specific settings
@@ -79,9 +85,17 @@ class SelfPlayArgs(PPOArgs):
     # Game evaluation
     eval_games: int = 16  # Number of games for evaluation
     eval_env_ids: List[str] = field(
-        default_factory=lambda: ["TicTacToe-v0", "KuhnPoker-v1"]
+        default_factory=lambda: [
+            "TicTacToe-v0", 
+            "KuhnPoker-v1", 
+            "SimpleNegotiation-v0", 
+            "SimpleNegotiation-v1",
+            "TruthAndDeception-v1"
+        ]
     )
-    eval_use_llm_obs_wrappers: List[bool] = field(default_factory=lambda: [False, True])
+    eval_use_llm_obs_wrappers: List[bool] = field(
+        default_factory=lambda: [False, True, True, True, True]
+    )
     eval_opponent_names: List[str] = field(
         default_factory=lambda: ["random", "google/gemini-2.0-flash-lite-001"]
     )
@@ -1003,6 +1017,11 @@ if __name__ == "__main__":
         assert (
             not args.use_llm_obs_wrapper
         ), "Please set --no-use_llm_obs_wrapper for TicTacToe-v0"
+    elif "SimpleNegotiation-v0" == args.env_id or "SimpleNegotiation-v1" == args.env_id:
+        assert args.use_llm_obs_wrapper, "Please set --use_llm_obs_wrapper for SimpleNegotiation"
+    elif "TruthAndDeception-v1" == args.env_id:
+        assert args.use_llm_obs_wrapper, "Please set --use_llm_obs_wrapper for TruthAndDeception"
+        
     assert len(args.eval_env_ids) == len(args.eval_use_llm_obs_wrappers)
 
     # Let's go
